@@ -1,9 +1,10 @@
 from flask import Flask
 from dotenv import load_dotenv
-
+from flask_mysqldb import MySQL 
 load_dotenv()
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
