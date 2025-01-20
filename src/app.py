@@ -38,9 +38,9 @@ def add_contact():
 @app.route('/edit_contact/<string:id>')
 def edit_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('select * from contacts where id = %s', (id))
+    cur.execute('select * from contacts where id={}'.format(id))
     data = cur.fetchall()
-    print(data[0])
+
     return render_template('edit-contact.html', contact = data[0])
 
 @app.route('/update_contact/<string:id>', methods=['POST'])
@@ -58,7 +58,7 @@ def update_contact(id):
 @app.route('/delete_contact/<string:id>')
 def delete_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('delete from contacts where id= %s', (id))
+    cur.execute('delete from contacts where id={}'.format(id))
     mysql.connection.commit()
     flash('Conctat Removed Successfully')
     return redirect(url_for('index'))
